@@ -9,10 +9,11 @@ repos:
     hooks:
       - id: eslint
         name: ESLint (frontend)
-        entry: npx eslint src --ext .js,.jsx
+        entry: sh -c "cd frontend && npx eslint"
         language: system
         files: frontend/.*\.(js|jsx)$
-        working_directory: frontend
+
+
   - repo: local
     hooks:
       - id: checkstyle
