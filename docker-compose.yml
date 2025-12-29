@@ -1,13 +1,37 @@
 version: "3.9"
 
 services:
+  postgres:
+    image: postgres:16
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: polyread
+      POSTGRES_USER: polyread
+      POSTGRES_PASSWORD: polyread
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    ports:
+      - "8081:8080"
+    depends_on:
+      - postgres
+
   backend:
     build: ./backend
     container_name: spring-backend
     ports:
       - "8080:8080"
-    env_file:
-      - .env
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/polyread
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+    depends_on:
+      - postgres
 
   frontend:
     build: ./frontend
@@ -16,3 +40,6 @@ services:
       - "3000:80"
     depends_on:
       - backend
+
+volumes:
+  postgres_data:
