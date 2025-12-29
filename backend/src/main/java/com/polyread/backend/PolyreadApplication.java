@@ -7,13 +7,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Main application class for PolyRead.
  */
 @SpringBootApplication
-public final class PolyreadApplication {
+public class PolyreadApplication {
 
     /**
-     * Private constructor to prevent instantiation of utility class.
+     * Protected constructor to satisfy Checkstyle while allowing Spring Boot
+     * to instantiate this class.
      */
-    private PolyreadApplication() {
-        throw new UnsupportedOperationException("Utility class");
+    protected PolyreadApplication() {
+        // Constructor for Spring Boot
     }
 
     /**

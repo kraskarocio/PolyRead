@@ -32,4 +32,13 @@ public final class WordService {
     public List<Word> getAllWords() {
         return wordRepository.findAll();
     }
+
+    /**
+     * Add a new word.
+     *
+     * @param word the word to add
+     */
+    public void addWord(final Word word) {
+        wordRepository.save(word);
+    }
 }

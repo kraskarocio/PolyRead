@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import jakarta.persistence.Column;
 
 @Entity
 @Table(name = "words")
@@ -26,6 +27,7 @@ public class Word {
    /**
     * The word text.
     */
+   @Column(unique = true)
    private String text;
    /**
     * The definition of the word.
