@@ -1,33 +1,30 @@
-package com.polyread.backend.words.controller;
+package com.polyread.backend.words;
 
-import com.polyread.backend.words.service.WordService;
-import com.polyread.backend.words.domain.Word;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 /**
  * REST controller for word operations.
  */
 @RestController
-@RequestMapping("/api/words")
-public final class WordController {
+@RequestMapping("/api/user-words")
+public final class UserWordController {
     /**
      * Service for word operations.
      */
-    private final WordService wordService;
+    private final UserWordService userWordService;
 
     /**
      * Constructor for WordController.
      *
      * @param service the word service
      */
-    public WordController(final WordService service) {
-        this.wordService = service;
+    public UserWordController(final UserWordService service) {
+        this.userWordService = service;
     }
 
     /**
@@ -36,19 +33,18 @@ public final class WordController {
      * @return list of all words
      */
     @GetMapping
-    public List<Word> getAllWords() {
-        return wordService.getAllWords();
+    public List<UserWord> getAllWords() {
+        return userWordService.getAllWords();
     }
 
     /**
      * Add a new word.
      *
      * @param word the word to add
-     * @return response entity indicating the result
+     * @return the added word
      */
     @PostMapping
-    public ResponseEntity<Void> addWord(@RequestBody final Word word) {
-        wordService.addWord(word);
-        return ResponseEntity.ok().build();
+    public UserWord addWord(@RequestBody final UserWord word) {
+        return userWordService.addWord(word);
     }
 }
